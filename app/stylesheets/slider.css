@@ -46,9 +46,17 @@
 }
 
 #camvid-slider-bar {
+	position:absolute;
+	right:56px;
     width:150px;
     height:68px;
     background: url(../../images/camvid_bg.png) no-repeat;
+}
+
+#camvid-capture {
+    width:78px;
+    height:50px;
+    background: url(../../images/Capture.png);
 }
 
 #camvid-slider-handle {
