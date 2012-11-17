@@ -424,7 +424,7 @@ function resizeCamera(){
 */
     
     if(cam_initialized){
-        updateCam(new_cam_width, new_cam_height);
+//        updateCam(new_cam_width, new_cam_height);
     } else {
         if(v_player != -1){
             $('camera_container').innerHTML = getPlayerCode(new_cam_width, new_cam_height);

@@ -67,6 +67,28 @@
 	top: 7px;
 }
 
+#fullscreen-slider {
+	position:absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#fullscreen-slider-bar {
+	position:absolute;
+	left:0px;
+    width:150px;
+    height:68px;
+    background: url(../../images/camvid_bg.png) no-repeat;
+}
+
+#fullscreen-slider-handle {
+    width:68px;
+    height:36px;
+    cursor:ew-resize;
+    background: url(../../images/camvid_gripper.png) no-repeat;
+	top: 7px;
+}
+
 #controller {
 	width: 250px;
 	height: 250px;

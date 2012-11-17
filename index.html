@@ -158,6 +158,20 @@
                     function(v) {
                     }
             });
+
+            FullScreenSlide = new Control.Slider('fullscreen-slider-handle', 'fullscreen-slider-bar', {
+				axis: 'horizontal',
+                sliderValue: 0.1,
+				values: [0.1,0.9],
+                onSlide: 
+                    function(v) {
+                    },
+                onChange:
+                    function(v) {
+						if(v==0.9) screenfull.request();
+						if(v==0.1) screenfull.exit();
+                    }
+            });
 			
         });
 		
@@ -260,6 +274,11 @@
 	<div id="slider">
 		<div id="slider-bar">
 			<div id="slider-handle"><p id="percent"></p></div>
+		</div>
+	</div>
+	<div id="fullscreen-slider">
+		<div id="fullscreen-slider-bar">
+			<div id="fullscreen-slider-handle"><p></p></div>
 		</div>
 	</div>
 	<div id="camvid-slider">
