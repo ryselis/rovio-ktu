@@ -5,6 +5,7 @@
     <script type="text/javascript" src="app/javascript/prototype.js"></script>
     <script type="text/javascript" src="app/javascript/scriptaculous.js"></script>
     <script type="text/javascript" src="app/javascript/rovio.js"></script>
+    <script type="text/javascript" src="app/javascript/screenfull.js"></script>
     <script type="text/javascript">
     // <![CDATA[
         var hHeight, bHeight, slide, speed, direction, lastDirection = 'stop_moving';
@@ -111,7 +112,7 @@
 			lastDirection = direction;
 		}
 		
-        Event.observe(window, 'load', function() {
+        Event.observe(window, 'load', function() {		
 			Event.observe('camera_container', 'DOMMouseScroll', wheel); // mozilla
 			Event.observe('camera_container', 'mousewheel', wheel);	// IE/Opera
 			
