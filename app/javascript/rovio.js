@@ -243,6 +243,8 @@ function init(){
 
     $('fake_link').focus();
 
+    createXMLRequestObjs();
+	
     // all containers must be visible to create sliders
 	/*
     $('sidetab_2_container').style.display = 'block';
@@ -263,18 +265,17 @@ function init(){
     //svol_slider = new Control.Slider('svol_handle','svol_track',{ range:$R(0,31), onChange: changeSpeakerVol});
     //mvol_slider = new Control.Slider('mvol_handle','mvol_track',{ range:$R(0,31), onChange: changeMicVol});
 
-    createXMLRequestObjs();
 
     // upnp settings need to be called as soon as possible for RTSP feeds
-    loadUPnPFields(); 
+    //loadUPnPFields(); 
 
     // need to know web port for ActiveX
     loadWebPort();
 
     // need to know the manual external ip
-    getAllParameters(); 
+    //getAllParameters(); 
 
-//    getMyself();
+    getMyself();
 
     loadForceMJPEGFromURL();
 
@@ -1206,11 +1207,14 @@ function changeCamBrightness(value, ctr){
     brightness = value;
 }
 function isClicked(element){
+/*
     if(element.className.indexOf('__clicked') == -1){
         return 0;
     } else {
         return 1;
     }
+	*/
+	return 0;
 }
 function toggleClickedImg(element){
     if(isClicked(element)){
@@ -2412,9 +2416,9 @@ var loadUPnPResponse = function(t) {
                 upnp_enabled = parseInt(v);
                 if(initial_upnp_load){
                     if(parseInt(v)){
-                        $('net_upnpenabled').checked = 1;
+//                        $('net_upnpenabled').checked = 1;
                     } else {
-                        $('net_upnpdisabled').checked = 1;
+//                        $('net_upnpdisabled').checked = 1;
                     }
                 }
                 break;
@@ -3411,57 +3415,11 @@ function createXMLRequestObj(){
     }
     return xmlReqObj;
 }
-/*
-function jsonp(url) {
-    var head = document.head;
-    var script = document.createElement("script");
-
-    script.setAttribute("src", url);
-    head.appendChild(script);
-    head.removeChild(script);
-}
-*/
-function checkIframeLoaded() {
-	// Get a handle to the iframe element
-	ManualRequestCompleted = 1;
-	return;
-	
-	iframe = document.getElementById('fakedframe');
-	var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-	
-	var content = iframe.contentWindow.document.body.innerHTML;
-	if(content!='') {
-		console.log('ifcontents: '+content);
-		ManualRequestCompleted = 1;
-		return;	
-	}
-	/*
-	// Check if loading is complete
-	if (iframeDoc.readyState  == 'complete' ) {
-		ManualRequestCompleted = 1;
-		return;
-	} 
-	*/
-// If we are here, it is not loaded. Set things up so we check   the status again in 100 milliseconds
-	window.setTimeout('checkIframeLoaded();', 100);      
-}
 		
 function framep(url) {
 	var ifrm = document.getElementById('fakedframe');
 	console.log('mrc: '+ ManualRequestCompleted);
-/*	
-if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
-  iframe.onreadystatechange = function(){
-    if (iframe.readyState == "complete"){
-		ManualRequestCompleted = 1;
-    }
-  };
-} else {
-  iframe.onload = function(){
-    ManualRequestCompleted = 1;
-  };
-}	
-*/		
+
 	if(ManualRequestCompleted==1)
 	{
 		console.log('cmd: '+url);
@@ -3477,23 +3435,33 @@ function manualRequest(url, params, onSuccess, method){
     url = hostIP + url; // + '&callback=myCallback';
     if(method == null) method = 'POST';
     if(method == 'GET'){
-        url += '?' + params;
+		if(params!='') url += '?' + params;
         params = '';
     }
 	
-	framep(url);
-/*
+if(typeof xhr[0] === "undefined") return;
+	
+//	framep(url);
+
     // make sure that no threads require authentication
     var t;
     for(t = 0; t < MAX_REQUESTS; t++){
-        if(xhr[t].readyState != 0){
-            try {
-                if(xhr[t].status == 401){
-                    return;
-                }
-            } catch(e){
-            }
-        }
+	//console.log(xhr[t]);
+		if (typeof xhr[t] !== "undefined") 
+		{
+			if(xhr[t].readyState != 0){
+				try {
+					if(xhr[t].status == 401){
+						return;
+					}
+				} catch(e){
+				}
+			}
+		}
+		else
+		{
+			//break;
+		}
     }
     
     // find a free thread that's DONE
@@ -3505,10 +3473,14 @@ function manualRequest(url, params, onSuccess, method){
 	    if(count > MAX_REQUESTS*2){
 	        return;
         }
-	} while(xhr[cur_xhr].readyState != 0 && xhr[cur_xhr].readyState != 4)
+		if(typeof xhr[t] !== "undefined") CurXhrState = xhr[cur_xhr].readyState;
+		else CurXhrState=0;
+	} while(CurXhrState != 0 && CurXhrState != 4)
+		
+	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
 		
 	var cur_index = cur_xhr;
-	xhr[cur_index].open (method, url, true);
+	xhr[cur_index].open (method, urlprefix+escape(url), true);
 	
 	if(onSuccess != null){
 	    xhrRtn[cur_index] = onSuccess;
@@ -3523,7 +3495,7 @@ function manualRequest(url, params, onSuccess, method){
         xhr[cur_index].send(params);
     } catch(e) {
     }
-	*/
+	
 }
 
 function statusRequest(url, params, onSuccess){
@@ -3551,8 +3523,14 @@ function statusRequest(url, params, onSuccess){
 	        return;
         }
 	} while(status_xhr[cur_status_xhr].readyState != 0 && status_xhr[cur_status_xhr].readyState != 4)
-	var cur_index = cur_status_xhr;
-	status_xhr[cur_index].open ("POST", url, true);
+	
+	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
+		
+	var cur_index = cur_xhr;
+	xhr[cur_index].open ("GET", urlprefix+escape(url), true);
+	
+//	var cur_index = cur_status_xhr;
+//	status_xhr[cur_index].open ("POST", url, true);
 	
 	if(onSuccess != null){
 	    status_xhrRtn[cur_index] = onSuccess;
