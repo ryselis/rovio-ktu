@@ -19,6 +19,8 @@ var DEFAULT_IE_PLAYER = 0;
 var DEFAULT_MOZ_PLAYER = 2;
 var DEFAULT_OTHER_PLAYER = 2;
 
+var ManualRequestCompleted = 1;
+
 var COOKIE_RTSP_USER = 'rovio_rtsp_user';
 var COOKIE_RTSP_PASS = 'rovio_rtsp_pass';
 var COOKIE_JAVA_WARNING = 'rovio_java';
@@ -272,7 +274,7 @@ function init(){
     // need to know the manual external ip
     getAllParameters(); 
 
-    getMyself();
+//    getMyself();
 
     loadForceMJPEGFromURL();
 
@@ -284,10 +286,10 @@ function init(){
         return;
     }
     
-    refreshPathList();
+//    refreshPathList();
     updateStatus();
     
-    status_interval_id = setInterval("updateStatus()",STATUS_INTERVAL);
+//    status_interval_id = setInterval("updateStatus()",STATUS_INTERVAL);
     
     // selectTab($('sidetab_1'));
     // selectTab($('settingtab_1'));
@@ -422,14 +424,12 @@ function resizeCamera(){
     cam_con.style.width = new_cam_width + "px";
     cam_con.style.height = new_cam_height + "px";
 */
-    
+   
     if(cam_initialized){
 //        updateCam(new_cam_width, new_cam_height);
     } else {
         if(v_player != -1){
             $('camera_container').innerHTML = getPlayerCode(new_cam_width, new_cam_height);
-//			kodas = getPlayerCode(new_cam_width, new_cam_height);
-//            $('camera_container').setStyle({background: 'url("'+kodas+'") top left'});
 //	        if(v_player == 4) setTimeout('continuousPhoto();',1000);
             if($('camera_container').innerHTML != ''){
                 cam_initialized = true;
@@ -3421,10 +3421,55 @@ function jsonp(url) {
     head.removeChild(script);
 }
 */
-
+function checkIframeLoaded() {
+	// Get a handle to the iframe element
+	ManualRequestCompleted = 1;
+	return;
+	
+	iframe = document.getElementById('fakedframe');
+	var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+	
+	var content = iframe.contentWindow.document.body.innerHTML;
+	if(content!='') {
+		console.log('ifcontents: '+content);
+		ManualRequestCompleted = 1;
+		return;	
+	}
+	/*
+	// Check if loading is complete
+	if (iframeDoc.readyState  == 'complete' ) {
+		ManualRequestCompleted = 1;
+		return;
+	} 
+	*/
+// If we are here, it is not loaded. Set things up so we check   the status again in 100 milliseconds
+	window.setTimeout('checkIframeLoaded();', 100);      
+}
+		
 function framep(url) {
 	var ifrm = document.getElementById('fakedframe');
-	ifrm.setAttribute("src", url);
+	console.log('mrc: '+ ManualRequestCompleted);
+/*	
+if (navigator.userAgent.indexOf("MSIE") > -1 && !window.opera) {
+  iframe.onreadystatechange = function(){
+    if (iframe.readyState == "complete"){
+		ManualRequestCompleted = 1;
+    }
+  };
+} else {
+  iframe.onload = function(){
+    ManualRequestCompleted = 1;
+  };
+}	
+*/		
+	if(ManualRequestCompleted==1)
+	{
+		console.log('cmd: '+url);
+		ManualRequestCompleted = 0;
+		ifrm.setAttribute("src", url);
+		//checkIframeLoaded();
+		window.setTimeout('checkIframeLoaded();', 100);
+	}
 }
 
 function manualRequest(url, params, onSuccess, method){

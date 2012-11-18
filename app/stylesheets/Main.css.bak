@@ -11,12 +11,8 @@ body
 	width: auto;
 	height: auto;
 	background-color: #2b2b2b;
-    font-family: arial;
-    font-size: 10pt;
-}
-
-:-webkit-full-screen {
-	background-color: #2b2b2b;	
+    	font-family: arial;
+    	font-size: 10pt;
 }
 
 #camera_container {
