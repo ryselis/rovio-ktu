@@ -14,9 +14,6 @@
         var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving', last_cam_pos = 'down';
 		speed=0.90, captureY = 0;
         
-        
-		 
-            	
         function setBgPos(v) {
             var off = v * hHeight;
             var pos = -bHeight + (v * bHeight);
@@ -33,9 +30,6 @@
 				speed = v*10;
 			}
         }
-        
-        
-        
 		
         Event.observe(window, 'load', function() {		
 			Event.observe('camera_container', 'DOMMouseScroll', wheel); // mozilla
@@ -115,19 +109,10 @@
 			$('debug').update(Action);
 		}
 		
-		
-
-		
 		// mouse wheel code from http://adomas.org/javascript-mouse-wheel/
-		function handle(delta) {
-			
+		function handle(delta) {		
 			slide.setValueBy(-delta);
 		}
-		
-		
-		
-		
-		
 
 			/** Event handler for mouse wheel event. */
 		function wheel(event){
