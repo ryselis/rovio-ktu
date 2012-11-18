@@ -131,6 +131,13 @@
 			}
         }
         
+        function setHeadPosition (pos) {
+        	if (pos != '' && last_cam_pos != pos){
+        		setCamPosTo(pos);
+                last_cam_pos = pos;
+            }         
+        }
+        
 		function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 		{
 			direction = 'stop_moving';	// stop if tablet in lying position
@@ -331,6 +338,11 @@
 		<div id="slider-bar">
 			<div id="slider-handle"><p id="percent"></p></div>
 		</div>
+	</div>
+	<div id="head_position">
+		<div id="position1" ontouchstart="event.preventDefault(); setHeadPosition('down');" onmousedown="setHeadPosition('down');"></div>
+		<div id="position2" ontouchstart="event.preventDefault(); setHeadPosition('mid');" onmousedown="setHeadPosition('mid');"></div>
+		<div id="position3" ontouchstart="event.preventDefault(); setHeadPosition('up');" onmousedown="setHeadPosition('up');"></div>
 	</div>
 	<div id="fullscreen-slider">
 		<div id="fullscreen-slider-bar">
