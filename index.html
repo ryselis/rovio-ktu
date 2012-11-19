@@ -8,60 +8,100 @@
     <script type="text/javascript" src="app/javascript/screenfull.js"></script>
     <script type="text/javascript">
     // <![CDATA[
-        var hHeight, bHeight, slide, speed, direction, lastDirection = 'stop_moving';
+        var hHeight, bHeight, slide, speed, direction1, direction2, lastDirection = 'stop_moving';
 		speed=1;
         
         $(document).observe('keydown', function (e) {
         	var is_hotkey = true; 
         	var is_rotkey = false;
+        	var opposing_direction = '';
+        	var direction = '';
     		switch (e.keyCode) {
         		case Event.KEY_LEFT:
-        			direction = 'move_left';
+        			direction = direction1 = 'move_left';
+        			opposing_direction = 'move_right';
             		break;
         		case Event.KEY_RIGHT:
-        			direction = 'move_right';
+        			direction = direction1 = 'move_right';
+        			opposing_direction = 'move_left';
             		break;
             	case Event.KEY_DOWN:
-            		direction = 'move_back';
+            		direction = direction2 = 'move_back';
+            		opposing_direction = 'move_forward';
             		break;
             	case Event.KEY_UP:
-            		direction = 'move_forward';
+            		direction = direction2 = 'move_forward';
+            		opposing_direction = 'move_back';
             		break;
             	case 65:	//A
-        			direction = 'move_left';
+        			direction = direction1 = 'move_left';
+        			opposing_direction = 'move_right';
             		break;
         		case 68:	//D
-        			direction = 'move_right';
+        			direction = direction1 = 'move_right';
+        			opposing_direction = 'move_left';
             		break;
             	case 83:	//S
-            		direction = 'move_back';
+            		direction = direction2 = 'move_back';
+            		opposing_direction = 'move_forward';
             		break;
             	case 87:	//W
-            		direction = 'move_forward';
+            		direction = direction2 = 'move_forward';
+            		opposing_direction = 'move_back';
             		break;
             	case 81:	//Q
-            		direction = 'rot_left';
+            		direction = direction1 = 'rot_left';
             		is_rotkey = true;
+            		opposing_direction = 'rot_right';
+            		direction2 = '';
             		break;
             	case 69:	//E
-            		direction = 'rot_right'
+            		direction = direction1 = 'rot_right'
+            		opposing_direction = 'rot_left';
             		is_rotkey = true;
+            		direction2 = '';
             		break; 
             	default:
             		is_hotkey = false;
             	}
-//            console.log(e.keyCode);
-//            console.log(direction);
-            if (speed != 1 && (is_moving == 0 || direction!=lastDirection)){
+            if (speed != 1 && (is_moving == 0 || (direction1!=lastDirection1 && direction1 != opposing_direction &&
+            		direction2 != opposing_direction))){
+            		if (direction1 != '' && direction2 == ''){
+            			direction = direction1;
+            		}
+            		if (direction1 == '' && direction2 != ''){
+            			direction = direction2;
+            		}
+            		if (direction1 != '' && direction2 != ''){
+            			direction = 'move_';
+            			switch (direction2){
+            				case 'move_forward':
+            					direction += 'fwd_';
+            					break;
+            				case 'move_back':
+            					direction += 'bck';
+            					break;
+            			}
+            			direction += '_';
+            			switch (direction1){
+            				case 'move_left':
+            					direction += 'left';
+            					break;
+            				case 'move_right':
+            					direction += 'right';
+            					break;
+            			}
+            		}
+            		stopMoving();
+            		startMoving(direction, speed);
+            		lastDirection1 = direction1;
+            		lastDirection2 = direction2;
+            		is_moving = 1;
+            		logAction('start');
+            	}
+            		var image_url_part;
+            		var button_name;
             	
-            	stopMoving();
-            	startMoving(direction, speed);
-            	lastDirection = direction;
-            	is_moving = 1;
-            	logAction('start');
-            }
-            	var image_url_part;
-            	var button_name;
             	switch (direction){
             		case 'move_left':
             			image_url_part = 'left';
@@ -101,12 +141,12 @@
       });
    
 		$(document).observe('keyup', function(e){
-			if (((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) && direction == 'move_left') ||
-				 ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68) && direction == 'move_right') ||
-				 ((e.keyCode == Event.KEY_UP || e.keyCode == 87) && direction == 'move_forward') || 
-				 ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83) && direction == 'move_back') ||
-				 (e.keyCode == 81 && direction == 'rot_left') ||
-				 (e.keyCode == 69 && direction == 'rot_right')){
+			if (((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) && direction1 == 'move_left') ||
+				 ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68) && direction1 == 'move_right') ||
+				 ((e.keyCode == Event.KEY_UP || e.keyCode == 87) && direction2 == 'move_forward') || 
+				 ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83) && direction2 == 'move_back') ||
+				 (e.keyCode == 81 && direction1 == 'rot_left') ||
+				 (e.keyCode == 69 && direction1 == 'rot_right')){
          		stopMoving();
          		is_moving = 0;
          		lastDirection = 'stop_moving';
