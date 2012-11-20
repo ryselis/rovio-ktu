@@ -1243,9 +1243,9 @@ function sendCommand(cgi_page,params){
     manualRequest(cgi_page, params, null);
 }
 function setCamPosTo(pos){
-  //  changeToUnclickedImg($('cam_up'));
-  //  changeToUnclickedImg($('cam_down'));
-  //  changeToUnclickedImg($('cam_mid'));
+    changeToUnclickedImg($('cam_up'));
+    changeToUnclickedImg($('cam_down'));
+    changeToUnclickedImg($('cam_mid'));
             
     var cmd = -1;
     switch(pos){
@@ -1265,7 +1265,7 @@ function setCamPosTo(pos){
     
     if(cmd != -1){
         sendCommand("rev.cgi", "Cmd=nav&action=18&drive=" + cmd);
-   //     changeToClickedImg($('cam_' + pos));
+        changeToClickedImg($('cam_' + pos));
     }
 }
 function joystickMove(angle,speed){
@@ -3477,7 +3477,7 @@ if(typeof xhr[0] === "undefined") return;
 		else CurXhrState=0;
 	} while(CurXhrState != 0 && CurXhrState != 4)
 		
-	urlprefix = "http://192.168.0.89/roviopad/rovio-ktu/proxy.php?url=";	
+	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
 		
 	var cur_index = cur_xhr;
 	xhr[cur_index].open (method, urlprefix+escape(url), true);
@@ -3524,7 +3524,7 @@ function statusRequest(url, params, onSuccess){
         }
 	} while(status_xhr[cur_status_xhr].readyState != 0 && status_xhr[cur_status_xhr].readyState != 4)
 	
-	urlprefix = "http://192.168.0.89/roviopad/rovio-ktu/proxy.php?url=";	
+	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
 		
 	var cur_index = cur_xhr;
 	xhr[cur_index].open ("GET", urlprefix+escape(url), true);
