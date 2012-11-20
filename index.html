@@ -10,6 +10,8 @@
     // <![CDATA[
         var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving';
 		speed=1;
+        var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving';
+		speed=1, captureY = 0;
         
         $(document).observe('keydown', function (e) {
         	var is_hotkey = true; 
@@ -135,8 +137,33 @@
             	}
             		var image_url_part;
             		var button_name;
-            	
-            	
+            	switch (direction){
+            		case 'move_left':
+            			image_url_part = 'left';
+            			button_name = 'strifeleft';
+            			break;
+            		case 'move_right':
+            			image_url_part = 'right';
+            			button_name = 'striferight';
+            			break;
+            		case 'move_forward':
+            			image_url_part = 'forward';
+            			button_name = 'forward';
+            			break;
+            		case 'move_back':
+            			image_url_part = 'backward';
+            			button_name = 'backward';
+            			break;
+            		case 'rot_left':
+            			image_part_url = 'left';
+            			button_name = 'rotate_left';
+            			break;
+            		case 'rot_right':
+            			image_part_url = 'right';
+            			button_name = 'rotate_right';
+            			break;
+            		
+            	}
             	if (is_hotkey){
             		if (is_rotkey){
             			setButtonDown2(button_name, image_part_url, 0, 62)
@@ -320,6 +347,7 @@
                     },
                 onChange:
                     function(v) {
+                    	CaptureONForced('camvid-capture'); //Grazinamas capture mygtukas i pradine padeti, nutraukiamas filmavimas
                     }
             });
 
@@ -389,6 +417,45 @@
 		function handle(delta) {
 			slide.setValueBy(-delta);
 		}
+		
+		
+		
+		function CaptureON(button, cond){ 		 //cond = 0 - ispaudziamas mygtukas, cond = 1 - atleidziamas mygtukas
+			if (slide2.value==0.1) {    //video capture 
+				if (cond==0) CaptureONToggle(button, 50, "video"); //video turi reaguoti tik i ispaudima. Ne isspaudima
+			}
+			if (slide2.value==0.9) {	//foto capture
+				if (cond==0){											
+					 CaptureONToggle(button, 150, "foto");   
+					 //-----------fotografijos realizacija----------
+					}
+				else if (cond==1) CaptureONToggle(button, 0, "foto");  
+			}
+		}
+		
+		function CaptureONToggle(button, variable, mode){
+					if (mode=="video"){   
+						if (captureY==0){
+							//--------pradeti filmuoti---------------
+						}
+						if(captureY==50){
+							variable = 0;	//Atskiria, jei einama is STOP i SHOT
+							//--------baigti filmuoti----------------
+						}
+							}
+					captureY = variable;				
+					$(button).setStyle({background: 'url(images/capture-2.png) 0 '+captureY+'px'});
+		}
+		
+		
+		function CaptureONForced(button){ //Kai slider pajudinamas, nutraukiamas filmavimas
+			captureY = 0;
+			if (slide2.value==0.9){
+				//--------baigti filmuoti----------------
+			}
+			$(button).setStyle({background: 'url(images/capture-2.png) 0 '+captureY+'px'});
+		}
+		
 
 			/** Event handler for mouse wheel event. */
 		function wheel(event){
@@ -457,8 +524,8 @@
 		<div id="camvid-slider-bar">
 			<div id="camvid-slider-handle"><p></p></div>
 		</div>
-		<div id="camvid-capture">
-		</div>
+		<div id="camvid-capture" ontouchstart="event.preventDefault(); CaptureON('camvid-capture', 0);" ontouchend="event.preventDefault(); CaptureOFF('camvid-capture', 1);"
+		 onmousedown="CaptureON('camvid-capture', 0);" onmouseup="CaptureON('camvid-capture', 1);"></div>
 	</div>
 	<div id="controller">
 		<div id="forward" 
