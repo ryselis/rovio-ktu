@@ -3477,7 +3477,7 @@ if(typeof xhr[0] === "undefined") return;
 		else CurXhrState=0;
 	} while(CurXhrState != 0 && CurXhrState != 4)
 		
-	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
+	urlprefix = "http://192.168.0.89/roviopad/rovio-ktu/proxy.php?url=";	
 		
 	var cur_index = cur_xhr;
 	xhr[cur_index].open (method, urlprefix+escape(url), true);
@@ -3524,7 +3524,7 @@ function statusRequest(url, params, onSuccess){
         }
 	} while(status_xhr[cur_status_xhr].readyState != 0 && status_xhr[cur_status_xhr].readyState != 4)
 	
-	urlprefix = "http://localhost/roviopad/rovio-ktu/proxy.php?url=";	
+	urlprefix = "http://192.168.0.89/roviopad/rovio-ktu/proxy.php?url=";	
 		
 	var cur_index = cur_xhr;
 	xhr[cur_index].open ("GET", urlprefix+escape(url), true);
