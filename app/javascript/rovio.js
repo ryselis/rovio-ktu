@@ -1243,9 +1243,9 @@ function sendCommand(cgi_page,params){
     manualRequest(cgi_page, params, null);
 }
 function setCamPosTo(pos){
-    changeToUnclickedImg($('cam_up'));
-    changeToUnclickedImg($('cam_down'));
-    changeToUnclickedImg($('cam_mid'));
+  //  changeToUnclickedImg($('cam_up'));
+  //  changeToUnclickedImg($('cam_down'));
+  //  changeToUnclickedImg($('cam_mid'));
             
     var cmd = -1;
     switch(pos){
@@ -1265,7 +1265,7 @@ function setCamPosTo(pos){
     
     if(cmd != -1){
         sendCommand("rev.cgi", "Cmd=nav&action=18&drive=" + cmd);
-        changeToClickedImg($('cam_' + pos));
+  //      changeToClickedImg($('cam_' + pos));
     }
 }
 function joystickMove(angle,speed){
