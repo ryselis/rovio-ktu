@@ -8,7 +8,7 @@
     <script type="text/javascript" src="app/javascript/screenfull.js"></script>
     <script type="text/javascript">
     // <![CDATA[
-        var hHeight, bHeight, slide, speed, direction1, direction2, lastDirection = 'stop_moving';
+        var hHeight, bHeight, slide, speed, direction1, direction2, lastDirection = 'stop_moving', last_cam_pos = 'down';
 		speed=1;
         
         $(document).observe('keydown', function (e) {
@@ -60,7 +60,23 @@
             		opposing_direction = 'rot_left';
             		is_rotkey = true;
             		direction2 = '';
-            		break; 
+            		break;
+            	case 82:	//R
+            		is_hotkey = false;
+            		if (last_cam_pos == 'down')
+            			setHeadPosition('mid');
+            		else
+            			if (last_cam_pos == 'mid')
+            				setHeadPosition('up');
+            		break;
+            	case 70:	//F
+            		is_hotkey = false;
+            		if (last_cam_pos == 'up')
+            			setHeadPosition('mid');
+            		else
+            			if (last_cam_pos == 'mid')
+            				setHeadPosition('down');
+            		break;
             	default:
             		is_hotkey = false;
             	}
