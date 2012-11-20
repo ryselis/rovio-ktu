@@ -8,7 +8,7 @@
     <script type="text/javascript" src="app/javascript/screenfull.js"></script>
     <script type="text/javascript">
     // <![CDATA[
-        var hHeight, bHeight, slide, speed, direction1, direction2, lastDirection = 'stop_moving';
+        var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving';
 		speed=1;
         
         $(document).observe('keydown', function (e) {
@@ -28,10 +28,12 @@
             	case Event.KEY_DOWN:
             		direction = direction2 = 'move_back';
             		opposing_direction = 'move_forward';
+            		direction1 = '';
             		break;
             	case Event.KEY_UP:
             		direction = direction2 = 'move_forward';
             		opposing_direction = 'move_back';
+            		direction1 = '';
             		break;
             	case 65:	//A
         			direction = direction1 = 'move_left';
@@ -44,10 +46,12 @@
             	case 83:	//S
             		direction = direction2 = 'move_back';
             		opposing_direction = 'move_forward';
+            		direction1 = '';
             		break;
             	case 87:	//W
             		direction = direction2 = 'move_forward';
             		opposing_direction = 'move_back';
+            		direction1 = '';
             		break;
             	case 81:	//Q
             		direction = direction1 = 'rot_left';
@@ -64,43 +68,6 @@
             	default:
             		is_hotkey = false;
             	}
-            if (speed != 1 && (is_moving == 0 || (direction1!=lastDirection1 && direction1 != opposing_direction &&
-            		direction2 != opposing_direction))){
-            		if (direction1 != '' && direction2 == ''){
-            			direction = direction1;
-            		}
-            		if (direction1 == '' && direction2 != ''){
-            			direction = direction2;
-            		}
-            		if (direction1 != '' && direction2 != ''){
-            			direction = 'move_';
-            			switch (direction2){
-            				case 'move_forward':
-            					direction += 'fwd_';
-            					break;
-            				case 'move_back':
-            					direction += 'bck';
-            					break;
-            			}
-            			direction += '_';
-            			switch (direction1){
-            				case 'move_left':
-            					direction += 'left';
-            					break;
-            				case 'move_right':
-            					direction += 'right';
-            					break;
-            			}
-            		}
-            		stopMoving();
-            		startMoving(direction, speed);
-            		lastDirection1 = direction1;
-            		lastDirection2 = direction2;
-            		is_moving = 1;
-            		logAction('start');
-            	}
-            		var image_url_part;
-            		var button_name;
             	
             	switch (direction){
             		case 'move_left':
@@ -128,6 +95,48 @@
             			button_name = 'rotate_right';
             			break;
             	}
+            	
+            if (speed != 1 && (is_moving == 0 || ((direction1!=lastDirection1 || direction2 != lastDirection2) && direction1 != opposing_direction &&
+            		direction2 != opposing_direction))){
+            		if (direction1 != '' && direction2 == ''){
+            			direction = direction1;
+            		}
+            		if (direction1 == '' && direction2 != ''){
+            			direction = direction2;
+            		}
+            		if (direction1 != '' && direction2 != ''){
+            			direction = 'move_';
+            			switch (direction2){
+            				case 'move_forward':
+            					direction += 'fwd_';
+            					break;
+            				case 'move_back':
+            					direction += 'bck_';
+            					break;
+            			}
+            			switch (direction1){
+            				case 'move_left':
+            					direction += 'left';
+            					break;
+            				case 'move_right':
+            					direction += 'right';
+            					break;
+            			}
+            		}
+            		stopMoving();
+            		startMoving(direction, speed);
+            		console.log(direction1);
+            		console.log(direction2);
+            		console.log(direction);
+            		lastDirection1 = direction1;
+            		lastDirection2 = direction2;
+            		is_moving = 1;
+            		logAction('start');
+            	}
+            		var image_url_part;
+            		var button_name;
+            	
+            	
             	if (is_hotkey){
             		if (is_rotkey){
             			setButtonDown2(button_name, image_part_url, 0, 62)
@@ -141,19 +150,74 @@
       });
    
 		$(document).observe('keyup', function(e){
-			if (((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) && direction1 == 'move_left') ||
-				 ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68) && direction1 == 'move_right') ||
-				 ((e.keyCode == Event.KEY_UP || e.keyCode == 87) && direction2 == 'move_forward') || 
-				 ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83) && direction2 == 'move_back') ||
-				 (e.keyCode == 81 && direction1 == 'rot_left') ||
-				 (e.keyCode == 69 && direction1 == 'rot_right')){
+			var is_key_up = false;
+			if ((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) && direction1 == 'move_left'){
+				direction1 = '';
+				is_key_up = true;
+				setButtonUp('strifeleft', 'left');
+				
+			}
+			if ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68) && direction1 == 'move_right'){
+				direction1 = '';
+				is_key_up = true;
+				setButtonUp('striferight', 'right');
+			}
+			if ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83) && direction2 == 'move_back'){
+				direction2 = '';
+				is_key_up = true;
+				setButtonUp('backward', 'backward');
+			}
+			if ((e.keyCode == Event.key_up || e.keyCode == 87) && direction2 == 'move_forward'){
+				console.log(e.keyCode);
+				direction2 = '';
+				is_key_up = true;
+				setButtonUp('forward', 'forward');
+			}
+			if (e.keyCode == 81 && direction1 == 'rot_left'){
+				direction1 = '';
+				is_key_up = true;
+				setButtonUp2('rotate_left', 'left');
+			}
+			if (e.keyCode == 69 && direction1 == 'rot_right'){
+				direction1 = '';
+				setButtonUp2('rotate_right', 'right');
+				is_key_up = true;
+			}
+			if (is_key_up){
          		stopMoving();
          		is_moving = 0;
          		lastDirection = 'stop_moving';
-         		setAllButtonsUp('forward', 'forward', 'strifeleft', 'left', 'striferight', 'right', 'backward', 'backward', 'rotate_left', 'left', 'rotate_right', 'right');
          	}
+         	if (direction1 != '' && direction2 == ''){
+            			direction = direction1;
+            		}
+            		if (direction1 == '' && direction2 != ''){
+            			direction = direction2;
+            		}
+            		if (direction1 != '' && direction2 != ''){
+            			direction = 'move_';
+            			switch (direction2){
+            				case 'move_forward':
+            					direction += 'fwd_';
+            					break;
+            				case 'move_back':
+            					direction += 'bck_';
+            					break;
+            			}
+            			switch (direction1){
+            				case 'move_left':
+            					direction += 'left';
+            					break;
+            				case 'move_right':
+            					direction += 'right';
+            					break;
+            			}
+            		}
+            		stopMoving();
+            		startMoving(direction, speed);
          });
 		 
+            	
         function setBgPos(v) {
             var off = v * hHeight;
             var pos = -bHeight + (v * bHeight);
