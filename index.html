@@ -279,7 +279,29 @@
         function setHeadPosition (pos) {
         	if (pos != '' && last_cam_pos != pos){
         		setCamPosTo(pos);
-                last_cam_pos = pos;
+                switch(last_cam_pos){
+                	case 'down':
+                		$(position1).setStyle({background: 'url(images/position1.png) 0 0px'});
+                		break;
+                	case 'mid':
+						$(position2).setStyle({background: 'url(images/position2.png) 0 0px'});
+                		break;
+                	case 'up':
+						$(position3).setStyle({background: 'url(images/position3.png) 0 0px'});
+                		break;
+                	}
+                switch(pos){
+                	case 'down':
+                		$(position1).setStyle({background: 'url(images/position1.png) 0 40px'});
+                		break;
+                	case 'mid':
+						$(position2).setStyle({background: 'url(images/position2.png) 0 40px'});
+                		break;
+                	case 'up':
+						$(position3).setStyle({background: 'url(images/position3.png) 0 40px'});
+                		break;
+                }
+               last_cam_pos = pos;
             }         
         }
         
