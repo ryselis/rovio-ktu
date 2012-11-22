@@ -12,7 +12,7 @@
     <script type="text/javascript">
     // <![CDATA[
         var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving', last_cam_pos = 'down';
-		speed=1, captureY = 0;
+		speed=0.90, captureY = 0;
         
         
 		 
@@ -66,7 +66,7 @@
             bWidth = $('slider-bar').getHeight();
             slide = new Control.Slider('slider-handle', 'slider-bar', {
 				axis: 'vertical',
-                sliderValue: 1,
+                sliderValue: 0.90,
 				values: [0,0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1],
                 onSlide: 
                     function(v) {
