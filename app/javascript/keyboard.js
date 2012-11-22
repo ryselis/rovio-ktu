@@ -52,22 +52,7 @@ $(document).observe('keydown', function (e) {
             		is_rotkey = true;
             		direction2 = '';
             		break;
-            	case 82:	//R
-            		is_hotkey = false;
-            		if (last_cam_pos == 'down')
-            			setHeadPosition('mid');
-            		else
-            			if (last_cam_pos == 'mid')
-            				setHeadPosition('up');
-            		break;
-            	case 70:	//F
-            		is_hotkey = false;
-            		if (last_cam_pos == 'up')
-            			setHeadPosition('mid');
-            		else
-            			if (last_cam_pos == 'mid')
-            				setHeadPosition('down');
-            		break;		
+            		
             	default:
             		is_hotkey = false;
             	}
@@ -179,37 +164,48 @@ $(document).observe('keydown', function (e) {
    
 		$(document).observe('keyup', function(e){
 			var is_key_up = false;
-			if ((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) && direction1 == 'move_left'){
-				direction1 = '';
-				is_key_up = true;
+			if ((e.keyCode == Event.KEY_LEFT || e.keyCode == 65) ){
 				setButtonUp('strifeleft', 'left');
+				if (direction1 == 'move_left'){
+					direction1 = '';
+					is_key_up = true;
+				}
 				
 			}
-			if ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68) && direction1 == 'move_right'){
-				direction1 = '';
-				is_key_up = true;
+			if ((e.keyCode == Event.KEY_RIGHT || e.keyCode == 68)){
 				setButtonUp('striferight', 'right');
+				if (direction1 == 'move_right'){
+					direction1 = '';
+					is_key_up = true;
+				}
 			}
-			if ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83) && direction2 == 'move_back'){
-				direction2 = '';
-				is_key_up = true;
+			if ((e.keyCode == Event.KEY_DOWN || e.keyCode == 83)){
 				setButtonUp('backward', 'backward');
+				if (direction2 == 'move_back'){
+					direction2 = '';
+					is_key_up = true;
+				}
 			}
-			if ((e.keyCode == Event.key_up || e.keyCode == 87) && direction2 == 'move_forward'){
-				console.log(e.keyCode);
-				direction2 = '';
-				is_key_up = true;
+			if ((e.keyCode == Event.KEY_UP || e.keyCode == 87)){
 				setButtonUp('forward', 'forward');
+				if (direction2 == 'move_forward'){
+					direction2 = '';
+					is_key_up = true;
+				}
 			}
-			if (e.keyCode == 81 && direction1 == 'rot_left'){
-				direction1 = '';
-				is_key_up = true;
+			if (e.keyCode == 81) {
 				setButtonUp2('rotate_left', 'left');
+				if (direction1 == 'rot_left'){
+					direction1 = '';
+					is_key_up = true;
+				}
 			}
-			if (e.keyCode == 69 && direction1 == 'rot_right'){
-				direction1 = '';
+			if (e.keyCode == 69) {
 				setButtonUp2('rotate_right', 'right');
-				is_key_up = true;
+				if (direction1 == 'rot_right'){
+					direction1 = '';
+					is_key_up = true;
+				}
 			}
 			if (is_key_up){
          		stopMoving();
