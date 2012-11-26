@@ -22,13 +22,13 @@ function setHeadPosition (pos) {
         		setCamPosTo(pos);
                 switch(last_cam_pos){
                 	case 'down':
-                		$(position1).setStyle({background: 'url(images/position1.png) 0 0px'});
+                		$(position1).setStyle({background: 'url(images/position1.png)'});
                 		break;
                 	case 'mid':
-						$(position2).setStyle({background: 'url(images/position2.png) 0 0px'});
+						$(position2).setStyle({background: 'url(images/position2.png)'});
                 		break;
                 	case 'up':
-						$(position3).setStyle({background: 'url(images/position3.png) 0 0px'});
+						$(position3).setStyle({background: 'url(images/position3.png)'});
                 		break;
                 	}
                 switch(pos){

@@ -61,18 +61,26 @@ $(document).observe('keydown', function (e) {
             		case 'move_left':
             			image_url_part = 'left';
             			button_name = 'strifeleft';
+            			xpoz = 36;
+            			ypoz = 0;
             			break;
             		case 'move_right':
             			image_url_part = 'right';
             			button_name = 'striferight';
+            			xpoz = 36;
+            			ypoz = 0;
             			break;
             		case 'move_forward':
             			image_url_part = 'forward';
             			button_name = 'forward';
+            			xpoz = 0;
+            			ypoz = 36;
             			break;
             		case 'move_back':
             			image_url_part = 'backward';
             			button_name = 'backward';
+            			xpoz = 0;
+            			ypoz = 36;
             			break;
             		case 'rot_left':
             			image_part_url = 'left';
@@ -123,22 +131,31 @@ $(document).observe('keydown', function (e) {
             	}
             		var image_url_part;
             		var button_name;
+            		var xpoz, ypoz;
             	switch (direction){
             		case 'move_left':
             			image_url_part = 'left';
             			button_name = 'strifeleft';
+            			xpoz = 36;
+            			ypoz = 0;
             			break;
             		case 'move_right':
             			image_url_part = 'right';
             			button_name = 'striferight';
+            			xpoz = 36;
+            			ypoz = 0;
             			break;
             		case 'move_forward':
             			image_url_part = 'forward';
             			button_name = 'forward';
+            			xpoz = 0;
+            			ypoz = 36;
             			break;
             		case 'move_back':
             			image_url_part = 'backward';
             			button_name = 'backward';
+            			xpoz = 0;
+            			ypoz = 36;
             			break;
             		case 'rot_left':
             			image_part_url = 'left';
@@ -155,7 +172,8 @@ $(document).observe('keydown', function (e) {
             			setButtonDown2(button_name, image_part_url, 0, 62)
             		}
             		else{
-            			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'_on.png)'})
+            //			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'.png) '+xpoz+' '+ypoz+'px'});
+            			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'_on.png)'});
             		}
             		
             	}
@@ -259,7 +277,7 @@ function setButtonDown(button, direction) {
 		}
 		
 		function setButtonUp(button, direction) {
-			$(button).setStyle({backgroundImage: 'url(images/'+direction+'_off.png)'});
+			$(button).setStyle({backgroundImage: 'url(images/'+direction+'.png)'});
 			stopMoving();
 			logAction('end 1');
 		}
@@ -272,10 +290,10 @@ function setButtonDown(button, direction) {
 
 		function setAllButtonsUp(button1, direction1, button2, direction2, button3, direction3, button4, direction4, 
 				button5, direction5, button6, direction6) {
-			$(button1).setStyle({backgroundImage: 'url(images/'+direction1+'_off.png)'});
-			$(button2).setStyle({backgroundImage: 'url(images/'+direction2+'_off.png)'});
-			$(button3).setStyle({backgroundImage: 'url(images/'+direction3+'_off.png)'});
-			$(button4).setStyle({backgroundImage: 'url(images/'+direction4+'_off.png)'});
+			$(button1).setStyle({backgroundImage: 'url(images/'+direction1+'.png)'});
+			$(button2).setStyle({backgroundImage: 'url(images/'+direction2+'.png)'});
+			$(button3).setStyle({backgroundImage: 'url(images/'+direction3+'.png)'});
+			$(button4).setStyle({backgroundImage: 'url(images/'+direction4+'.png)'});
 			setButtonUp2(button5, direction5);
 			setButtonUp2(button6, direction6);
 			stopMoving();
