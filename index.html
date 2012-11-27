@@ -98,8 +98,8 @@
                     },
                 onChange:
                     function(v) {
-						if(v==0.9) screenfull.request();
-						if(v==0.1) screenfull.exit();
+						//if(v==0.9) screenfull.request();
+						//if(v==0.1) screenfull.exit();
                     }
             });
 			
@@ -187,17 +187,17 @@
 	</div>
 	<div id="controller">
 		<div id="forward" 
-			ontouchstart="event.preventDefault(); setButtonDown('forward', 'forward');" ontouchend="event.preventDefault(); setButtonUp('forward', 'forward');" 
-			onmousedown="setButtonDown('forward', 'forward');" onmouseup="setButtonUp('forward', 'forward');"></div>
+			ontouchstart="event.preventDefault(); setButtonDown('forward', 'forward', 0, 36);" ontouchend="event.preventDefault(); setButtonUp('forward', 'forward');" 
+			onmousedown="setButtonDown('forward', 'forward', 0, 36);" onmouseup="setButtonUp('forward', 'forward');"></div>
 		<div id="strifeleft" 
-			ontouchstart="event.preventDefault(); setButtonDown('strifeleft', 'left');" ontouchend="event.preventDefault(); setButtonUp('strifeleft', 'left');" 
-			onmousedown="setButtonDown('strifeleft', 'left');" onmouseup="setButtonUp('strifeleft', 'left');"></div>
+			ontouchstart="event.preventDefault(); setButtonDown('strifeleft', 'left', 36, 0);" ontouchend="event.preventDefault(); setButtonUp('strifeleft', 'left');" 
+			onmousedown="setButtonDown('strifeleft', 'left', 36, 0);" onmouseup="setButtonUp('strifeleft', 'left');"></div>
 		<div id="striferight" 
-			ontouchstart="event.preventDefault(); setButtonDown('striferight', 'right');" ontouchend="event.preventDefault(); setButtonUp('striferight', 'right');" 
-			onmousedown="setButtonDown('striferight', 'right');" onmouseup="setButtonUp('striferight', 'right');"></div>
+			ontouchstart="event.preventDefault(); setButtonDown('striferight', 'right', 36, 0);" ontouchend="event.preventDefault(); setButtonUp('striferight', 'right');" 
+			onmousedown="setButtonDown('striferight', 'right', 36, 0);" onmouseup="setButtonUp('striferight', 'right');"></div>
 		<div id="backward" 
-			ontouchstart="event.preventDefault(); setButtonDown('backward', 'backward');" ontouchend="event.preventDefault(); setButtonUp('backward', 'backward');" 
-			onmousedown="setButtonDown('backward', 'backward');" onmouseup="setButtonUp('backward', 'backward');"></div>
+			ontouchstart="event.preventDefault(); setButtonDown('backward', 'backward', 0, 36);" ontouchend="event.preventDefault(); setButtonUp('backward', 'backward');" 
+			onmousedown="setButtonDown('backward', 'backward', 0, 36);" onmouseup="setButtonUp('backward', 'backward');"></div>
         <div id="joystick_box">
             <div id="joystick"></div>
         </div>	

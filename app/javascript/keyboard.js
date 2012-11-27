@@ -172,8 +172,8 @@ $(document).observe('keydown', function (e) {
             			setButtonDown2(button_name, image_part_url, 0, 62)
             		}
             		else{
-            //			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'.png) '+xpoz+' '+ypoz+'px'});
-            			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'_on.png)'});
+            			$(button_name).setStyle({background: 'url(images/'+image_url_part+'.png) '+xpoz+'px '+ypoz+'px'});
+            //			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'_on.png)'});
             		}
             		
             	}
@@ -259,8 +259,8 @@ $(document).observe('keydown', function (e) {
             		startMoving(direction, speed);
          });
          
-function setButtonDown(button, direction) {
-			$(button).setStyle({backgroundImage: 'url(images/'+direction+'_on.png)'});
+function setButtonDown(button, direction, xpos, ypos) {
+			$(button).setStyle({background: 'url(images/'+direction+'.png) '+xpos+'px '+ypos+'px'});
 			if (speed != 1){
 				if(direction=='forward') startMoving('move_forward',speed);
 				if(direction=='backward') startMoving('move_back',speed);
@@ -277,7 +277,7 @@ function setButtonDown(button, direction) {
 		}
 		
 		function setButtonUp(button, direction) {
-			$(button).setStyle({backgroundImage: 'url(images/'+direction+'.png)'});
+			$(button).setStyle({background: 'url(images/'+direction+'.png)'});
 			stopMoving();
 			logAction('end 1');
 		}
@@ -290,10 +290,10 @@ function setButtonDown(button, direction) {
 
 		function setAllButtonsUp(button1, direction1, button2, direction2, button3, direction3, button4, direction4, 
 				button5, direction5, button6, direction6) {
-			$(button1).setStyle({backgroundImage: 'url(images/'+direction1+'.png)'});
-			$(button2).setStyle({backgroundImage: 'url(images/'+direction2+'.png)'});
-			$(button3).setStyle({backgroundImage: 'url(images/'+direction3+'.png)'});
-			$(button4).setStyle({backgroundImage: 'url(images/'+direction4+'.png)'});
+			$(button1).setStyle({background: 'url(images/'+direction1+'.png)'});
+			$(button2).setStyle({background: 'url(images/'+direction2+'.png)'});
+			$(button3).setStyle({background: 'url(images/'+direction3+'.png)'});
+			$(button4).setStyle({background: 'url(images/'+direction4+'.png)'});
 			setButtonUp2(button5, direction5);
 			setButtonUp2(button6, direction6);
 			stopMoving();
