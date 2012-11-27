@@ -100,7 +100,7 @@
                 onChange:
                     function(v) {
 						if(v==0.9){ accelerometer_on=true; stopMoving();}
-						if(v==0.1) accelerometer_on=false;
+						if(v==0.1){ accelerometer_on=false; stopMoving();}
                     }
             });
 			
@@ -212,7 +212,6 @@
 	</div>
 </div>
 
-<div id="debug"><br/><br /><br /></div>
 <div id="hiddenFrame" style="display:none;"><iframe id="fakedframe" name="fakedframe" style="display:none;" src="" /></div>
 
 </body>
