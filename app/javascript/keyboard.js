@@ -259,6 +259,9 @@ $(document).observe('keydown', function (e) {
             		stopMoving();
             		startMoving(direction, speed);
          });
+function setButtonBackground(button, direction, xpos, ypos) {
+			$(button).setStyle({background: 'url(images/'+direction+'.png) '+xpos+'px '+ypos+'px'});
+		}        
          
 function setButtonDown(button, direction, xpos, ypos) {
 			$(button).setStyle({background: 'url(images/'+direction+'.png) '+xpos+'px '+ypos+'px'});
