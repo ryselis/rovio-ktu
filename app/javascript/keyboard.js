@@ -173,9 +173,6 @@ $(document).observe('keydown', function (e) {
             		}
             		else{
             			$(button_name).setStyle({background: 'url(images/'+image_url_part+'.png) '+xpoz+'px '+ypoz+'px'});
-            //			$(button_name).setStyle({backgroundImage: 'url(images/'+image_url_part+'_on.png)'});
-            		}
-            		
             	}
             
       });
@@ -233,10 +230,10 @@ $(document).observe('keydown', function (e) {
          	if (direction1 != '' && direction2 == ''){
             			direction = direction1;
             		}
-            		if (direction1 == '' && direction2 != ''){
+            if (direction1 == '' && direction2 != ''){
             			direction = direction2;
-            		}
-            		if (direction1 != '' && direction2 != ''){
+            }
+            if (direction1 != '' && direction2 != ''){
             			direction = 'move_';
             			switch (direction2){
             				case 'move_forward':
@@ -254,7 +251,7 @@ $(document).observe('keydown', function (e) {
             					direction += 'right';
             					break;
             			}
-            		}
+            }
             		stopMoving();
             		startMoving(direction, speed);
          });
