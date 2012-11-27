@@ -275,9 +275,6 @@ function setButtonDown(button, direction, xpos, ypos) {
 		}
 		
 		// this image sprite based function should replace setButtonDown
-		function setButtonBackground2(button, direction, xpoz, ypoz) {
-			$(button).setStyle({background: 'url(images/rotate_'+direction+'.png) '+xpoz+' '+ypoz+'px'});
-		}
 		function setButtonDown2(button, direction, xpoz, ypoz) {
 			$(button).setStyle({background: 'url(images/rotate_'+direction+'.png) '+xpoz+' '+ypoz+'px'});
 			startMoving("rot_"+direction,turn_speed);
