@@ -67,8 +67,6 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 						'striferight', 'right', 'backward', 'backward', 'rotate_left',
 						 'left', 'rotate_right', 'right');
 						}
-				setButtonBackground('rotate_left', 'rotate_left', 0, 0);
-				setButtonBackground('rotate_right', 'rotate_right', 0, 0);
 			lastDirection = direction;
 			}
 		}
