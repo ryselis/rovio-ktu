@@ -1,5 +1,6 @@
 function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 		{
+			if (accelerometer_on){
 			direction = 'stop_moving';	// stop if tablet in lying position
 			if (accelerationZ < -4){
 				if(accelerationX > 2) direction = 'move_forward'; 	// forward
@@ -60,5 +61,6 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			}
 			else stopMoving();
 			lastDirection = direction;
+			}
 		}
 		
