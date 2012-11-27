@@ -12,7 +12,7 @@
     <script type="text/javascript">
     // <![CDATA[
         var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving', last_cam_pos = 'down';
-		speed=0.90, captureY = 0;
+		speed=0.90, captureY = 0, accelerometer_on = false;
         
         function setBgPos(v) {
             var off = v * hHeight;
@@ -98,8 +98,8 @@
                     },
                 onChange:
                     function(v) {
-						//if(v==0.9) screenfull.request();
-						//if(v==0.1) screenfull.exit();
+						if(v==0.9) accelerometer_on=true;
+						if(v==0.1) accelerometer_on=false;
                     }
             });
 			

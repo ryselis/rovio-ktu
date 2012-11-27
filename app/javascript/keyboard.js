@@ -1,4 +1,5 @@
 $(document).observe('keydown', function (e) {
+	if (!accelerometer_on){
         	var is_hotkey = true; 
         	var is_rotkey = false;
         	var opposing_direction = '';
@@ -173,7 +174,10 @@ $(document).observe('keydown', function (e) {
             		}
             		else{
             			$(button_name).setStyle({background: 'url(images/'+image_url_part+'.png) '+xpoz+'px '+ypoz+'px'});
+            		}
             	}
+            }
+           
             
       });
    
@@ -295,4 +299,5 @@ function setButtonDown(button, direction, xpos, ypos) {
 			setButtonUp2(button6, direction6);
 			stopMoving();
 			logAction('end 2');
+			
 		}

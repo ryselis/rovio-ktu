@@ -1,5 +1,6 @@
 function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 		{
+			if (accelerometer_on){
 			direction = 'stop_moving';	// stop if tablet in lying position
 			if (accelerationZ < -4){
 				if(accelerationX > 2) direction = 'move_forward';	// forward
@@ -13,7 +14,7 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			}
 			else{
 				if (accelerationY > 2) direction = 'rot_left';
-				if (accelerationY > 2) direction = 'rot_right';
+				if (accelerationY < -2) direction = 'rot_right';
 			}
 			// logAction('AX='+accelerationX+"dir="+direction);
 			if(direction!='stop_moving') 
@@ -26,5 +27,6 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			}
 			else stopMoving();
 			lastDirection = direction;
+		}
 		}
 		
