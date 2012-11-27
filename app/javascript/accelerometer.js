@@ -53,6 +53,12 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 							setButtonBackground('backward', 'backward', 0, 36);
 							setButtonBackground('striferight', 'right', 36, 0);
 							break;
+						case "rot_left":
+							setButtonDown2('rotate_left', 'left', 0, 62);
+							break;
+						case "rot_right":
+							setButtonDown2('rotate_right', 'right', 0, 62);
+							break;
 					}
 				}
 			}
@@ -61,6 +67,8 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 						'striferight', 'right', 'backward', 'backward', 'rotate_left',
 						 'left', 'rotate_right', 'right');
 						}
+				setButtonUp2('rotate_left', 'left', 0, 0);
+				setButtonUp2('rotate_right', 'right', 0, 0);
 			lastDirection = direction;
 			}
 		}
