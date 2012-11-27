@@ -1,7 +1,7 @@
 function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 		{
 			direction = 'stop_moving';	// stop if tablet in lying position
-			if (accelerationX > -8){
+			if (accelerationZ < -4){
 				if(accelerationX > 2) direction = 'move_forward';	// forward
 				if(accelerationX < -2) direction = 'move_back'; 	// backward
 				if(accelerationY > 2) direction = 'move_left'; 		// left
