@@ -204,3 +204,8 @@
 	top: 0px;
 	cursor: pointer;
 }
+#debug {
+	position: absolute;
+	left:100px;
+	top:100px;
+}
