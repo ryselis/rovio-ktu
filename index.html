@@ -18,7 +18,7 @@
             var off = v * hHeight;
             var pos = -bHeight + (v * bHeight);
             //$('slider').setStyle({backgroundPosition: 0 Math.round(pos - off) + 'px'});
-			$('debug').innerHTML = v;
+			//$('debug').innerHTML = v;
         }
         
         function setSlideOutput(v) {
@@ -28,7 +28,7 @@
             }
             else{
 				speed = v*10;
-				$(debug).innerHTML = v;
+				//$(debug).innerHTML = v;
 			}
         }
 		
@@ -107,7 +107,7 @@
         });
 		
 		function logAction(Action) {
-			$('debug').update(Action);
+			//$('debug').update(Action);
 		}
 		
 		// mouse wheel code from http://adomas.org/javascript-mouse-wheel/
