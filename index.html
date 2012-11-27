@@ -11,8 +11,8 @@
     <script type="text/javascript" src="app/javascript/camera.js"></script>
     <script type="text/javascript">
     // <![CDATA[
-        var hHeight, bHeight, slide, speed, direction1='', direction2='', lastDirection = 'stop_moving', last_cam_pos = 'down';
-		speed=0.90, captureY = 0, accelerometer_on = false;
+        var hHeight, bHeight, slide, direction1='', direction2='', lastDirection = 'stop_moving', last_cam_pos = 'down';
+		var speed=0.90, captureY = 0, accelerometer_on = false;
         
         function setBgPos(v) {
             var off = v * hHeight;
@@ -27,7 +27,8 @@
             	stopMoving();
             }
             else{
-				speed = v*10;
+				speed = v*10 + 1;
+				console.log(v);
 				//$(debug).innerHTML = v;
 			}
         }

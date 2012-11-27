@@ -93,7 +93,7 @@ $(document).observe('keydown', function (e) {
             			break;
             	}
             	
-            if (speed != 1 && (is_moving == 0 || ((direction1!=lastDirection1 || direction2 != lastDirection2) && direction1 != opposing_direction &&
+            if (speed != 11 && (is_moving == 0 || ((direction1!=lastDirection1 || direction2 != lastDirection2) && direction1 != opposing_direction &&
             		direction2 != opposing_direction))){
             		if (direction1 != '' && direction2 == ''){
             			direction = direction1;
@@ -257,7 +257,7 @@ $(document).observe('keydown', function (e) {
             			}
             }
             		stopMoving();
-            		startMoving(direction, speed);
+            		//startMoving(direction, speed);
          });
 function setButtonBackground(button, direction, xpos, ypos) {
 			$(button).setStyle({background: 'url(images/'+direction+'.png) '+xpos+'px '+ypos+'px'});
@@ -265,7 +265,7 @@ function setButtonBackground(button, direction, xpos, ypos) {
          
 function setButtonDown(button, direction, xpos, ypos) {
 			$(button).setStyle({background: 'url(images/'+direction+'.png) '+xpos+'px '+ypos+'px'});
-			if (speed != 1){
+			if (speed != 11){
 				if(direction=='forward') startMoving('move_forward',speed);
 				if(direction=='backward') startMoving('move_back',speed);
 				if(direction=='left') startMoving('move_left',speed);

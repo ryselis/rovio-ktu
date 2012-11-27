@@ -19,7 +19,7 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			// logAction('AX='+accelerationX+"dir="+direction);
 			if(direction!='stop_moving') 
 			{
-				if(((is_moving==0)||(direction!=lastDirection)) && speed != 1)
+				if(((is_moving==0)||(direction!=lastDirection)) && speed != 11)
 				{
 					stopMoving();
 					startMoving(direction,speed);
