@@ -14,7 +14,7 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			}
 			else{
 				if (accelerationY > 2) direction = 'rot_left';
-				if (accelerationY > 2) direction = 'rot_right';
+				if (accelerationY < -2) direction = 'rot_right';
 			}
 			// logAction('AX='+accelerationX+"dir="+direction);
 			if(direction!='stop_moving') 
