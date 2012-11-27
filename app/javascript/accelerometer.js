@@ -21,9 +21,6 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 			{
 				if((is_moving==0)||(direction!=lastDirection) && speed != 1)
 				{
-					setAllButtonsUp('forward', 'forward', 'strifeleft', 'left', 
-						'striferight', 'right', 'backward', 'backward', 'rotate_left',
-						 'left', 'rotate_right', 'right');
 					stopMoving();
 					startMoving(direction,speed);
 					switch (direction)
@@ -59,7 +56,11 @@ function processAccelerometer(accelerationX, accelerationY, accelerationZ)
 					}
 				}
 			}
-			else stopMoving();
+			else {
+				setAllButtonsUp('forward', 'forward', 'strifeleft', 'left', 
+						'striferight', 'right', 'backward', 'backward', 'rotate_left',
+						 'left', 'rotate_right', 'right');
+						}
 			lastDirection = direction;
 			}
 		}
