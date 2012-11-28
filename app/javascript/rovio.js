@@ -275,7 +275,7 @@ function init(){
     // need to know the manual external ip
     //getAllParameters(); 
 
-    getMyself();
+    // getMyself();
 
     loadForceMJPEGFromURL();
 

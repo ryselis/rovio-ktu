@@ -60,6 +60,7 @@ body
 	height: 100px;
     top: 70px; 
 	right: 40px;
+	z-index: 500;
 }
 
 #debug {

@@ -59,6 +59,11 @@ function CaptureON(button, cond){ 		 //cond = 0 - ispaudziamas mygtukas, cond = 
 			}
 		}
 		
+		function hideImage()
+		{
+			$("fotoimage").setStyle({display: 'none'});
+		}
+
 		function CaptureONToggle(button, variable, mode){
 					if (mode=="video"){   
 						if (captureY==0){
