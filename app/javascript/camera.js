@@ -69,6 +69,23 @@ function CaptureON(button, cond){ 		 //cond = 0 - ispaudziamas mygtukas, cond = 
 							//--------baigti filmuoti----------------
 						}
 							}
+					if((mode=="foto")&&(!savingFoto))
+					{
+						savingFoto = true;
+						src='http://192.168.0.11/Jpeg/CamImg' + Math.floor (10000 * Math.random ()) + '.jpg';
+						new Ajax.Request('http://192.168.0.89/roviopad/rovio-ktu/control.php', {
+							method: 'get',
+							parameters: {getOption: 'savePicture', Picture: src},
+							onSuccess: function(transport) {
+								var response = transport.responseText || "no response text";
+								$("fotoimage").setStyle({display: 'block'});
+								$("fotoimage").setAttribute('src',src);
+								hideImage.delay(5);
+								savingFoto = false;
+							},
+							onFailure: function() { alert('Something went wrong...'); }
+						});
+					}
 					captureY = variable;				
 					$(button).setStyle({background: 'url(images/capture-2.png) 0 '+captureY+'px'});
 		}
