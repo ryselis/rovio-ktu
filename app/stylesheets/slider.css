@@ -9,22 +9,27 @@
     height:300px;
 /*    background: url(../../images/bg_v.png) no-repeat 0 -300px; */
 	position:absolute;
-	bottom:30px;
-	left: 30px;
+	bottom:-30px;
+	left: 45px;
 }
 
 #slider-bar {
-    width:42px;
-    height:300px;
-    background: url(../../images/track_v2.png) no-repeat;
+    width:110px;
+    height:187px;
+    background: url(../../images/Hand-throttle.png) no-repeat;
+}
+
+#fake-slider {
+    width:110px;
+    height:187px;
 }
 
 #slider-handle {
-    width:42px;
-    height:42px;
+    width:139px;
+    height:43px;
     cursor:ns-resize;
-    background: url(../../images/gripper.png) no-repeat;
-	margin-left: -5px;
+    background: url(../../images/controller.png) no-repeat;
+    margin-left: -16px;
 }
 
 #debug {
@@ -44,7 +49,7 @@
 	width: 160px;
     height:40px;
 	bottom:15px;
-	left: 100px;
+	left: 20px;
 }
 
 #position1 {
