@@ -54,6 +54,14 @@ body
     top: 61px; left: 61px;
 }
 
+#foto_container {
+    position: absolute;
+    width: 170px; 
+	height: 100px;
+    top: 70px; 
+	right: 40px;
+}
+
 #debug {
 	color: #FFFFFF;
 }
